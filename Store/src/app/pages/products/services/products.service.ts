@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../interfaces/product.interface';
+import { Iproduct } from '../interfaces/product.interface';
 
 //Decorador: 
 @Injectable({
@@ -16,8 +16,8 @@ export class ProductscService {
 
   //Método
   //Observable: representa un flujo de datos en el tiempo y/o una futura colección de data o valores
-  getProducts() : Observable<Product[]>{
+  getProducts() : Observable<Iproduct[]>{
 
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Iproduct[]>(this.apiUrl);
   }
 }

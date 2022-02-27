@@ -1,26 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductscService } from './services/products.service';
 import { tap } from 'rxjs/operators';
-import { Product } from './interfaces/product.interface';
+import { Iproduct } from './interfaces/product.interface';
+import { ShoppingCartService } from 'src/app/shared/components/services/shopping-cart-service';
 
 @Component({
   selector: 'app-products',
-  templateUrl: './products.component.html',
+  template: `
+
+      <!--el caracter pipe tiene la función de transformar Data-->
+    <section class="products">
+      <app-product 
+        (addToCartClick)="addToCart($event)"
+        [product]="product" 
+        *ngFor="let product of products">
+      </app-product>
+  </section>  
+  `,
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
   
-  products!: Product[];
-  constructor(private productSvc: ProductscService) { }
+  products!: Iproduct[];
+  constructor(private productSvc: ProductscService, private shoppingCartSvc: ShoppingCartService ) { }
 
   ngOnInit(): void {
 
     //De esta forma se llama el Observable
     this.productSvc.getProducts()
     .pipe(
-        tap((products: Product[]) => this.products = products)
+        tap((products: Iproduct[]) => this.products = products)
     ).subscribe();
   }
 
-  addToCart(product: Product): void {}
+  addToCart(product: Iproduct): void {
+
+    this.shoppingCartSvc.updateCart(product);
+  }
 }
