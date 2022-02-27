@@ -7,5 +7,6 @@ export interface Iproduct {
     description: string;
     categoryId: number;
     stock: number;
+    cant: number;
 
 } 
