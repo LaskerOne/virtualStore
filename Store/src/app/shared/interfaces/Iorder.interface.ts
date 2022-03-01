@@ -11,7 +11,7 @@ export interface Iorder {
     shippingAdres: string;
     city: string;
     date: string;
-    pickup: boolean;
+    isDelivery: boolean;
     id: number;
 }
 

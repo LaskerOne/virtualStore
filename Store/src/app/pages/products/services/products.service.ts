@@ -20,4 +20,10 @@ export class ProductscService {
 
     return this.http.get<Iproduct[]>(this.apiUrl);
   }
+
+  //metodo para hacer el update del stock
+  updateStock(productId: number, stock: number): Observable<any> {
+    const body = {"stock": stock};
+    return this.http.patch<any>(`${this.apiUrl}/${productId}`, body);
+  }
 }
